@@ -69,6 +69,31 @@ public class LigneBrisee {
 		}
 	
 	
+	public int nbMaxPoints() {  
+		return this.getListePoints().length - this.nbPoints();   // la soustraction nous permet de savoir le nombre de case null où l'on peut donc ajouter des points   
+	}
+	
+	public void deletePoint(Point pt) {
+		if (!(this.contientPoint(pt))) {   // verifie si le point est dans la ligne brisé 
+			System.out.print("Le point testé ne se trouve pas dans la ligne brisée \n");
+			}   
+		else {
+			int indFirst = 0;  // on met en place l'indice premier 
+			for (int i = 0; i < this.getListePoints().length; i++)
+				{
+				if (this.getListePoints()[i] == pt) { // quand on parcourt le tableau et qu'on tombe sur notre point 
+				indFirst = i;  // on le met à la place de notre indice premier
+				break;
+				}
+				}
+				this.getListePoints()[indFirst] = null;  // et on l'efface
+			for (int j = indFirst; j+1 < this.getListePoints().length; j++) {  
+				this.getListePoints()[j] = this.getListePoints()[j+1]; // ensuite on va décaler tout nos points vers l'arriere
+				this.getListePoints()[j+1] = null; // et supprimer la derniere case 
+				}
+		}
+	}
+	
 	
 	@Override
 	public String toString() {
